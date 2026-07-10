@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Notifications\AdminVerifyEmail;
 
 class Admin extends Authenticatable implements MustVerifyEmail
 {
@@ -20,4 +21,11 @@ class Admin extends Authenticatable implements MustVerifyEmail
             'password' => 'hashed',
         ];
     }
+
+    // Override agar pakai route admin
+    public function sendEmailVerificationNotification()
+    {
+        $this->notify(new AdminVerifyEmail);
+    }
+
 }

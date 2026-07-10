@@ -14,6 +14,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'admin' => \App\Http\Middleware\EnsureAdmin::class,
             'siswa' => \App\Http\Middleware\EnsureSiswa::class,
+            'email.verified' => \App\Http\Middleware\EnsureEmailVerified::class,
         ]);
 
         // Tambahkan ini — beritahu Laravel kemana redirect kalau belum login
@@ -25,6 +26,16 @@ return Application::configure(basePath: dirname(__DIR__))
                 return route('siswa.login');
             }
             return route('admin.login');
+        });
+
+        $middleware->redirectUsersTo(function ($request) {
+            if ($request->is('admin*')) {
+                return route('admin.verification.notice');
+            }
+            if ($request->is('siswa*')) {
+                return route('siswa.verification.notice');
+            }
+            return route('admin.verification.notice');
         });
     })
     ->withExceptions(function (Exceptions $exceptions): void {
