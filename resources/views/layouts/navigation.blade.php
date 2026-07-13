@@ -1,10 +1,13 @@
 <?php
 use Illuminate\Support\Facades\Auth;
 
-$currentUser = Auth::guard('admin')->check() ? Auth::guard('admin')->user() : Auth::guard('siswa')->user();
-$dashboardRoute = Auth::guard('admin')->check() ? route('admin.dashboard') : route('siswa.dashboard');
-$logoutRoute = Auth::guard('admin')->check() ? route('admin.logout') : route('siswa.logout');
-$isActive = request()->routeIs('admin.dashboard') || request()->routeIs('siswa.dashboard');
+$currentUser = Auth::guard('admin')->check() ? Auth::guard('admin')->user() : (Auth::guard('siswa')->check() ? Auth::guard('siswa')->user() : Auth::user()); // ← tambahkan fallback ke guard web
+
+$dashboardRoute = Auth::guard('admin')->check() ? route('admin.dashboard') : (Auth::guard('siswa')->check() ? route('siswa.dashboard') : route('home')); // ← fallback ke home untuk user biasa
+
+$logoutRoute = Auth::guard('admin')->check() ? route('admin.logout') : (Auth::guard('siswa')->check() ? route('siswa.logout') : route('logout')); // ← fallback ke logout untuk user biasa
+
+$isActive = request()->routeIs('admin.dashboard') || request()->routeIs('siswa.dashboard') || request()->routeIs('home');
 ?>
 
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">

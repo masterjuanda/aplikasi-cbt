@@ -6,6 +6,8 @@ use App\Http\Requests\AdminEmailVerificationRequest;
 use App\Http\Requests\SiswaEmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\PostinganController;
 
 // =====================
 // VERIFIKASI EMAIL ADMIN
@@ -79,3 +81,38 @@ Route::prefix('siswa')->name('siswa.')->group(function () {
         Route::post('/logout', [SiswaLoginController::class, 'logout'])->name('logout');
     });
 });
+
+// =====================
+// RUTE POSTINGAN
+// =====================
+Route::middleware('auth')->group(function () {
+    // Hanya pengguna yang bisa melihat daftar postingan
+    Route::get('/postingan', [PostinganController::class, 'index'])
+        ->middleware('permission:lihat-postingan')
+        ->name('postingan.index');
+
+    // Hanya yang punya izin menambah
+    Route::get('/postingan/tambah', [PostinganController::class, 'create'])
+        ->middleware('permission:tambah-postingan')
+        ->name('postingan.create');
+
+    Route::post('/postingan', [PostinganController::class, 'store'])
+        ->middleware('permission:tambah-postingan')
+        ->name('postingan.store');
+
+    // Untuk ubah & hapus dicek lewat Policy di dalam Controller
+    Route::get('/postingan/{postingan}/ubah', [PostinganController::class, 'edit'])
+        ->name('postingan.edit');
+
+    Route::put('/postingan/{postingan}', [PostinganController::class, 'update'])
+        ->name('postingan.update');
+
+    Route::delete('/postingan/{postingan}', [PostinganController::class, 'destroy'])
+        ->name('postingan.destroy');
+});
+
+Auth::routes(['verify' => true]);
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

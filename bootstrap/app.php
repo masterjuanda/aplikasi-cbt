@@ -15,6 +15,10 @@ return Application::configure(basePath: dirname(__DIR__))
             'admin' => \App\Http\Middleware\EnsureAdmin::class,
             'siswa' => \App\Http\Middleware\EnsureSiswa::class,
             'email.verified' => \App\Http\Middleware\EnsureEmailVerified::class,
+
+            'role'               => \Spatie\Permission\Middleware\RoleMiddleware::class,
+            'permission'         => \Spatie\Permission\Middleware\PermissionMiddleware::class,
+            'role_or_permission' => \Spatie\Permission\Middleware\RoleOrPermissionMiddleware::class,
         ]);
 
         // Tambahkan ini — beritahu Laravel kemana redirect kalau belum login
