@@ -21,8 +21,8 @@ class AdminSiswaSeeder extends Seeder
 
         // Data Siswa — sudah terverifikasi
         Siswa::create([
-            'name'              => 'Budi Santoso',
-            'email'             => 'budi@siswa.id',
+            'name'              => 'Master Juanda',
+            'email'             => 'master@siswa.id',
             'password'          => Hash::make('12345678'),
             'email_verified_at' => now(),
         ]);

@@ -16,6 +16,10 @@
                             class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
                             Lihat Postingan
                         </a>
+                        <a href="{{ route('users.index') }}"
+                            class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
+                            Manajemen Pengguna
+                        </a>
                     </div>
                 </div>
             </div>

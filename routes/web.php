@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\PostinganController;
+use App\Http\Controllers\UserController;
 
 // =====================
 // VERIFIKASI EMAIL ADMIN
@@ -109,6 +110,10 @@ Route::middleware('auth')->group(function () {
 
     Route::delete('/postingan/{postingan}', [PostinganController::class, 'destroy'])
         ->name('postingan.destroy');
+
+    Route::get('/users', [UserController::class, 'index'])->name('users.index');
+    Route::get('/users/export', [UserController::class, 'export'])->name('users.export');
+    Route::post('/users/import', [UserController::class, 'import'])->name('users.import');
 });
 
 Auth::routes(['verify' => true]);
@@ -116,3 +121,5 @@ Auth::routes(['verify' => true]);
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/users/export', [UserController::class, 'export'])->name('users.export');
+// Route::post('/users/import', [UserController::class, 'import'])->name('users.import');

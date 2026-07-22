@@ -9,6 +9,24 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <style>
+        input[type="email"],
+        input[type="password"],
+        input[type="text"] {
+            border: 1px solid #d1d5db !important;
+            border-radius: 6px !important;
+            padding: 8px 12px !important;
+            width: 100% !important;
+            outline: none !important;
+        }
+
+        input[type="email"]:focus,
+        input[type="password"]:focus,
+        input[type="text"]:focus {
+            border-color: #6366f1 !important;
+            box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2) !important;
+        }
+    </style>
 </head>
 
 <body class="font-sans text-gray-900 antialiased">
