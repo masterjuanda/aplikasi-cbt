@@ -114,6 +114,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/users', [UserController::class, 'index'])->name('users.index');
     Route::get('/users/export', [UserController::class, 'export'])->name('users.export');
     Route::post('/users/import', [UserController::class, 'import'])->name('users.import');
+    Route::get('/users/export-gabungan', [UserController::class, 'exportGabungan'])->name('users.export.gabungan');
 });
 
 Auth::routes(['verify' => true]);
@@ -121,5 +122,3 @@ Auth::routes(['verify' => true]);
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-// Route::get('/users/export', [UserController::class, 'export'])->name('users.export');
-// Route::post('/users/import', [UserController::class, 'import'])->name('users.import');

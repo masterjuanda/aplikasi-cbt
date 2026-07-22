@@ -19,10 +19,26 @@
             </div>
         @endif
 
+        {{-- Pesan Error Validasi --}}
+        @if (session('error'))
+            <div class="mb-4 p-3 bg-red-100 text-red-700 rounded">
+                {{ session('error') }}
+                <ul class="mt-2 list-disc list-inside">
+                    @foreach (session('detail_kesalahan', []) as $pesan)
+                        <li>{{ $pesan }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         {{-- Tombol Ekspor --}}
         <div class="mb-6">
             <a href="{{ route('users.export') }}" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
                 📥 Ekspor Excel
+            </a>
+            <a href="{{ route('users.export.gabungan') }}"
+                class="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600">
+                📊 Ekspor Laporan Gabungan
             </a>
         </div>
 
