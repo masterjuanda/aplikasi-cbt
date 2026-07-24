@@ -11,7 +11,7 @@
                 <div class="p-6 text-gray-900">
                     Selamat datang! Kamu sudah login.
 
-                    <div class="mt-4">
+                    <div class="mt-4 flex gap-x-4">
                         <a href="{{ route('postingan.index') }}"
                             class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
                             Lihat Postingan
